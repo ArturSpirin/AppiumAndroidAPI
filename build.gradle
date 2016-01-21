@@ -1,0 +1,17 @@
+group 'artrur.spirin'
+version 'v1-Dev'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile'org.seleniumhq.selenium:selenium-java:2.49.0'
+    compile 'io.appium:java-client:3.3.0'
+    compile'junit:junit:4.12'
+
+}
