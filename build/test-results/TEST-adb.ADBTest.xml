@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="adb.ADBTest" tests="28" skipped="0" failures="0" errors="0" timestamp="2016-01-21T06:43:46" hostname="afits-MacBook-Air-3.local" time="0.206">
+  <properties/>
+  <testcase name="testGetDevicesManufacturer" classname="adb.ADBTest" time="0.002"/>
+  <testcase name="testClearAppsData" classname="adb.ADBTest" time="0.0"/>
+  <testcase name="testGetInstalledPackages" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testGetDevicesLanguageSettings" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testRunCommand" classname="adb.ADBTest" time="0.147"/>
+  <testcase name="testGetDevicesModelID" classname="adb.ADBTest" time="0.0"/>
+  <testcase name="testOpenAppsActivity" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testRebootDevice" classname="adb.ADBTest" time="0.0"/>
+  <testcase name="testGetDevicesAirPlaneMode" classname="adb.ADBTest" time="0.0"/>
+  <testcase name="testGetAppVersionAsInt" classname="adb.ADBTest" time="0.0"/>
+  <testcase name="testRebootDevice1" classname="adb.ADBTest" time="0.003"/>
+  <testcase name="testClearLogBuffer" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testGetDevicesWiFiMode" classname="adb.ADBTest" time="0.007"/>
+  <testcase name="testGetAppName" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testForceStopApp" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testUninstallApp" classname="adb.ADBTest" time="0.002"/>
+  <testcase name="testGetAppVersionAsString" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testGetAnrFileLocation" classname="adb.ADBTest" time="0.0"/>
+  <testcase name="testGetDevicesSerialNumber" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testInstallApp" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testGetConnectedDevices" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testGetDevicesCellMode" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testGetDevicesNetworkInterfaceStatus" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testGetForegroundActivity" classname="adb.ADBTest" time="0.002"/>
+  <testcase name="testGetDevicesModel" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testGetAndroidVersionAsString" classname="adb.ADBTest" time="0.001"/>
+  <testcase name="testGetAndroidVersionAsInt" classname="adb.ADBTest" time="0.002"/>
+  <testcase name="testGetDevicesCarrier" classname="adb.ADBTest" time="0.0"/>
+  <system-out><![CDATA[List of devices attached 
+
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
