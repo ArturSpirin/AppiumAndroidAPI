@@ -17,9 +17,16 @@ public class Android {
      */
     public ADB adb;
     public AndroidDriver driver;
+    private static AndroidDriver dr = null;
 
     public Android(URL appiumServer, DesiredCapabilities desiredCapabilities){
         adb = new ADB(desiredCapabilities.getCapability("deviceName").toString());
         driver = new AndroidDriver(appiumServer, desiredCapabilities);
+        dr = driver;
+    }
+
+    public static AndroidDriver getDriver(){
+        if(dr==null) throw new RuntimeException("Android Driver was not initialized");
+        return dr;
     }
 }
