@@ -1,7 +1,10 @@
 package android;
 
 import adb.ADB;
+import android.objects.lollipop.base.Desktop;
+import android.objects.universal.Objects;
 import io.appium.java_client.android.AndroidDriver;
+import org.apache.xpath.operations.And;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
@@ -18,6 +21,11 @@ public class Android {
     public ADB adb;
     public AndroidDriver driver;
     private static AndroidDriver dr = null;
+    public static Objects objects = new Objects();
+
+    public Android(){
+
+    }
 
     public Android(URL appiumServer, DesiredCapabilities desiredCapabilities){
         adb = new ADB(desiredCapabilities.getCapability("deviceName").toString());
@@ -25,8 +33,13 @@ public class Android {
         dr = driver;
     }
 
-    public static AndroidDriver getDriver(){
-        if(dr==null) throw new RuntimeException("Android Driver was not initialized");
+    public static AndroidDriver driver(){
+        if(dr==null) throw new RuntimeException("Android Driver was not initialized. Create new instance of the Android class first");
         return dr;
+    }
+
+    //TODO Finish
+    public static Desktop tapHome(){
+        return new Desktop();
     }
 }

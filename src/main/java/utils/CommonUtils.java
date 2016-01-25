@@ -40,4 +40,6 @@ public class CommonUtils {
     public static boolean osIsLinux(){
         return getOS().contains("Linux");
     }
+
+
 }

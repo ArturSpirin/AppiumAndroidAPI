@@ -1,68 +1,74 @@
 package utils;
 
 import android.Android;
+import io.appium.java_client.android.AndroidDriver;
 
-/**
- * Created by Artur on 1/21/2016.
- */
 public class UiSelector {
 
-    private String locator = "new UiSelector()", text;
+    private String locator = "new UiSelector()";
 
     public UiSelector resourceId(String value){
-        locator = locator+".resourceId(\""+value+"\")";
+        locator += ".resourceId(\""+value+"\")";
         return this;
     }
 
     public UiSelector className(String value){
-        locator = locator+".className(\""+value+"\")";
+        locator += ".className(\""+value+"\")";
         return this;
     }
 
     public UiSelector classNameMatches(String regex){
-        locator = locator+".classNameMatches(\""+regex+"\")";
+        locator += ".classNameMatches(\""+regex+"\")";
         return this;
     }
 
     public UiSelector text(String value){
-        locator = locator+".text(\""+value+"\")";
+        locator += ".text(\""+value+"\")";
+        return this;
+    }
+
+    public UiSelector textContains(String value){
+        locator += ".textContains(\""+value+"\")";
         return this;
     }
 
     public UiSelector index(int value){
-        locator = locator+".index("+value+")";
+        locator += ".index("+value+")";
         return this;
     }
 
     public UiSelector clickable(boolean value){
-        locator = locator+".resourceId("+value+")";
+        locator += ".resourceId("+value+")";
         return this;
     }
 
     public UiSelector checked(boolean value){
-        locator = locator+".checked("+value+")";
+        locator+=".checked("+value+")";
         return this;
     }
 
     public UiSelector enabled(String value){
-        locator = locator+".enabled("+value+")";
+        locator += ".enabled("+value+")";
         return this;
     }
 
     public UiSelector description(String value){
-        locator = locator+".description(\""+value+"\")";
+        locator += ".description(\""+value+"\")";
         return this;
     }
 
     public UiSelector descriptionContains(String value){
-        locator = locator+".descriptionContains(\""+value+"\")";
+        locator += ".descriptionContains(\""+value+"\")";
         return this;
     }
 
     public UiSelector descriptionMatches(String regex){
-        locator = locator+".descriptionMatches(\""+regex+"\")";
+        locator += ".descriptionMatches(\""+regex+"\")";
         return this;
     }
 
-    //TODO Add method by xPath
+    public UiObject makeUiObject(){
+        AndroidDriver driver = Android.driver();
+        return new UiObject(driver.findElementByAndroidUIAutomator(locator));
+    }
 }
