@@ -1,6 +1,6 @@
 package utils;
 
-import android.Android;
+import api.android.Android;
 import io.appium.java_client.android.AndroidDriver;
 
 public class UiSelector {

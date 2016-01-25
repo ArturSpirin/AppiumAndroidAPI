@@ -1,6 +1,7 @@
-import adb.ADB;
-import android.Android;
+import api.android.Android;
+import api.android.lollipop.base.settings.wifi.WiFiSettings;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import utils.DriverManager;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,11 +20,13 @@ public class BaseTest {
             desiredCapabilities.setCapability("platformName", "Android");
             desiredCapabilities.setCapability("app", "./build/unlock_apk/unlock_apk-debug.apk");
 
-        Android android = new Android(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
+        new DriverManager(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
+        Android android = new Android();
 
         //ADB adb = new ADB("ZX1G22BV8Z");
         LinkedList items = android.adb.getDirectoryContent("/sdcard/");
         System.out.println(items);
+        new WiFiSettings().open().changeNetwork("ASTAnash");
         android.driver.quit();
     }
 }

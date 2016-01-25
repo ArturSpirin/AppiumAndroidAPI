@@ -1,6 +1,7 @@
 package utils;
 
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 public class UiObject {
@@ -12,7 +13,11 @@ public class UiObject {
     }
 
     public boolean exists(){
-        return uiLocator.isDisplayed();
+        try{
+            return uiLocator.isDisplayed();
+        }catch (NoSuchElementException e){
+            return false;
+        }
     }
 
     public boolean isCheckable(){
