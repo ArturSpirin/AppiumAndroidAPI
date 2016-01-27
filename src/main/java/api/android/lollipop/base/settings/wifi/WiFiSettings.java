@@ -1,11 +1,7 @@
 package api.android.lollipop.base.settings.wifi;
 
 import api.android.Android;
-import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import utils.DriverManager;
 import utils.UiObject;
 import utils.UiSelector;
 
@@ -18,15 +14,25 @@ public class WiFiSettings extends Android {
             activity = ".wifi.WifiSettings",
             pkg = "com.android.settings";
 
-    public WiFiSettings(){
-        PageFactory.initElements(DriverManager.getDriver(), this);
+    public static UiObject
+            status = null,
+            statusConnected = null,
+            switchWidget = null;
+
+    public UiObject statusConnected(){
+        if(statusConnected == null) statusConnected = new UiSelector().resourceId("android:id/summary").text("Connected").makeUiObject();
+        return statusConnected;
     }
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.android.settings:id/switch_widget\")")
-    public WebElement switchWidget;
+    public UiObject status(){
+        if(status == null) status = new UiSelector().resourceId("android:id/summary").makeUiObject();
+        return status;
+    }
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"android:id/summary\")")
-    public WebElement connected;
+    public UiObject switchWidget(){
+        if(switchWidget == null) switchWidget = new UiSelector().resourceId("com.android.settings:id/switch_widget").makeUiObject();
+        return switchWidget;
+    }
 
     public UiObject networkID(String ssid){
         return new UiSelector().text(ssid).resourceId("android:id/title").makeUiObject();
@@ -39,7 +45,6 @@ public class WiFiSettings extends Android {
 
     public WiFiSettingsDialog tapNetworkID(String ssid){
         UiObject network = networkID(ssid);
-        //networkID.click();
         try{
             if(!network.exists()) driver.scrollTo(ssid);
             network.tap();
@@ -51,12 +56,12 @@ public class WiFiSettings extends Android {
 
     public WiFiSettings changeNetwork(String ssid){
         tapNetworkID(ssid);
-        if(isVisible(dialog.passwordField)){
+        if(dialog.passwordField().exists()){
             throw new RuntimeException("This API does not support authentication with Access Points. " +
             "It is a requirement that AP you are trying to connect to has been pre-authenticated by you.");
         }
         dialog.tapConnect();
-       // connected.waitToAppear(25);
+        statusConnected().waitToAppear(25);
         return this;
     }
 }

@@ -1,8 +1,5 @@
 package utils;
 
-import api.android.Android;
-import io.appium.java_client.android.AndroidDriver;
-
 public class UiSelector {
 
     private String locator = "new UiSelector()";
@@ -68,7 +65,6 @@ public class UiSelector {
     }
 
     public UiObject makeUiObject(){
-        AndroidDriver driver = Android.driver();
-        return new UiObject(driver.findElementByAndroidUIAutomator(locator));
+        return new UiObject(locator);
     }
 }

@@ -1,6 +1,6 @@
 package utils;
 
-import api.android.lollipop.base.settings.wifi.WiFiSettings;
+import api.android.Android;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -19,5 +19,9 @@ public class DriverManager {
 
     public static AndroidDriver getDriver(){
         return driver;
+    }
+
+    public Android getAndroidDevice(){
+        return new Android();
     }
 }

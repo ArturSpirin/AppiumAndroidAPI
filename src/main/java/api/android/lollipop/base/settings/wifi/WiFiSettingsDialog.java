@@ -1,35 +1,32 @@
 package api.android.lollipop.base.settings.wifi;
 
 import api.android.Android;
-import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.PageFactory;
-import utils.DriverManager;
 import utils.UiObject;
 import utils.UiSelector;
-
-import java.net.URL;
 
 /**
  * Created by Artur on 1/24/2016.
  */
 public class WiFiSettingsDialog extends Android {
 
-    WiFiSettingsDialog(){
-        PageFactory.initElements(DriverManager.getDriver(), this);
+    public static UiObject
+            networkID = null,
+            passwordField = null;
+
+    public UiObject passwordField(){
+        if(passwordField == null) passwordField = new UiSelector().resourceId("android.settings:id/password").makeUiObject();
+        return passwordField;
     }
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"android:id/alertTitle\")")
-    public WebElement networkID;
-
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"android.settings:id/password\")")
-    public WebElement passwordField;
+    public UiObject networkID(){
+        if(networkID == null) networkID = new UiSelector().resourceId("android:id/alertTitle").makeUiObject();
+        return networkID;
+    }
 
     public WiFiSettings tapConnect(){
         try{
-            objects.button1.click();
+            objects.button1().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Connect button absent");
         }
@@ -38,7 +35,7 @@ public class WiFiSettingsDialog extends Android {
 
     public WiFiSettings tapForget(){
         try{
-            objects.button3.click();
+            objects.button3().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Forget button absent");
         }
@@ -47,7 +44,7 @@ public class WiFiSettingsDialog extends Android {
 
     public WiFiSettings tapCancel(){
         try{
-            objects.button2.click();
+            objects.button2().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Cancel button absent");
         }

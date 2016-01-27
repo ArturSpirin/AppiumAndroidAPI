@@ -6,103 +6,175 @@ import org.openqa.selenium.WebElement;
 
 public class UiObject {
 
-    private WebElement uiLocator;
-
-    public UiObject(WebElement locator){
+    public UiObject(String locator){
         this.uiLocator = locator;
+    }
+
+    private String uiLocator;
+
+    private boolean xPath(){
+        return uiLocator.contains("[@");
     }
 
     public boolean exists(){
         try{
-            return uiLocator.isDisplayed();
+            WebElement element;
+            if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+            else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+            return element.isDisplayed();
         }catch (NoSuchElementException e){
             return false;
         }
     }
 
     public boolean isCheckable(){
-        return uiLocator.getAttribute("checkable").equals("true");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("checkable").equals("true");
     }
 
     public boolean isChecked(){
-        return uiLocator.getAttribute("checked").equals("true");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("checked").equals("true");
     }
 
     public boolean isClickable(){
-        return uiLocator.getAttribute("clickable").equals("true");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("clickable").equals("true");
     }
 
     public boolean isEnabled(){
-        return uiLocator.getAttribute("enabled").equals("true");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("enabled").equals("true");
     }
 
     public boolean isFocusable(){
-        return uiLocator.getAttribute("focusable").equals("true");
+        WebElement element;
+        if(xPath())element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("focusable").equals("true");
     }
 
     public boolean isFocused(){
-        return uiLocator.getAttribute("focused").equals("true");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("focused").equals("true");
     }
 
     public boolean isScrollable(){
-        return uiLocator.getAttribute("scrollable").equals("true");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("scrollable").equals("true");
     }
 
     public boolean isLongClickable(){
-        return uiLocator.getAttribute("long-clickable").equals("true");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("long-clickable").equals("true");
     }
 
     public boolean isPassword(){
-        return uiLocator.getAttribute("password").equals("true");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("password").equals("true");
     }
 
     public boolean isSelected(){
-        return uiLocator.getAttribute("selected").equals("true");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("selected").equals("true");
     }
 
     public String getIndex(){
-        return uiLocator.getAttribute("index");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("index");
     }
 
     public String getBounds(){
-        return uiLocator.getAttribute("bounds");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("bounds");
     }
 
     public String getText(){
-        return uiLocator.getAttribute("name");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("name");
     }
 
     public String getResourceId(){
-        return uiLocator.getAttribute("resource-id");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("resource-id");
     }
 
     public String getClassName(){
-        return uiLocator.getAttribute("class");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("class");
     }
 
     public String getPackageName(){
-        return uiLocator.getAttribute("package");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("package");
     }
 
     public String getContentDesc(){
-        return uiLocator.getAttribute("content-desc");
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        return element.getAttribute("content-desc");
     }
 
     public UiObject clearText(){
-        uiLocator.clear();
+        if(xPath()) DriverManager.getDriver().findElementByXPath(uiLocator).clear();
+        else DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator).clear();
+        return this;
+    }
+
+    public UiObject scrollTo(){
+        if(xPath()) throw new RuntimeException("Cannot scroll to an xPath! Java Client does not support this");
+        else {
+            String text = uiLocator.substring(uiLocator.indexOf(".text(\""), uiLocator.indexOf("\")")).replace(".text(\"","");
+            DriverManager.getDriver().scrollTo(text);
+        }
         return this;
     }
 
     public UiObject setText(String value){
-        String existingText = uiLocator.getText();
+        WebElement element;
+        if(xPath()) element = DriverManager.getDriver().findElementByXPath(uiLocator);
+        else element = DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator);
+        String existingText = element.getText();
         if(!existingText.equals(value)) clearText();
         else if(existingText != null && !existingText.isEmpty()) clearText();
-        uiLocator.sendKeys(value);
+        element.sendKeys(value);
         return this;
     }
 
     public UiObject tap(){
-        uiLocator.click();
+        if(xPath()) DriverManager.getDriver().findElementByXPath(uiLocator).click();
+        else DriverManager.getDriver().findElementByAndroidUIAutomator(uiLocator).click();
         return this;
     }
 
