@@ -1,10 +1,10 @@
 package utils;
 
-
+import api.android.Android;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
-public class UiObject {
+public class UiObject extends Android{
 
     public UiObject(String locator){
         this.uiLocator = locator;
@@ -152,11 +152,29 @@ public class UiObject {
         return this;
     }
 
-    public UiObject scrollTo(){
+    public UiObject scrollToElement(){
+        int tries = 0;
+        while(!exists()){
+            System.out.println("Tries: "+tries);
+            if(tries>=7) throw new RuntimeException("Failed to scroll to the element, element not found!");
+            if(tries<=4)scrollDown();
+            else if(tries==5){
+                System.out.println("Scrolling all the way up");
+                scrollUp(5);
+            }else scrollDown();
+            tries++;
+        }
+        return this;
+    }
+
+    public UiObject scrollToText(){
         if(xPath()) throw new RuntimeException("Cannot scroll to an xPath! Java Client does not support this");
+        else if(!uiLocator.contains("")) throw new RuntimeException("UiSelector: "+uiLocator+" does not have a text attribute! Try to use scrollToElement() instead.");
         else {
-            String text = uiLocator.substring(uiLocator.indexOf(".text(\""), uiLocator.indexOf("\")")).replace(".text(\"","");
-            DriverManager.getDriver().scrollTo(text);
+            String text;
+            if(uiLocator.contains("textContains")) text = uiLocator.substring(uiLocator.indexOf(".textContains(\""), uiLocator.indexOf("\")")).replace(".textContains(\"","");
+            else text = uiLocator.substring(uiLocator.indexOf(".text(\""), uiLocator.indexOf("\")")).replace(".text(\"","");
+            DriverManager.getDriver().scrollToExact(text);
         }
         return this;
     }

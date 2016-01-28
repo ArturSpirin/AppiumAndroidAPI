@@ -1,5 +1,6 @@
 package api.android.lollipop.base.settings;
 
+import api.android.Android;
 import org.openqa.selenium.NoSuchElementException;
 import utils.UiObject;
 import utils.UiSelector;
@@ -7,12 +8,12 @@ import utils.UiSelector;
 /**
  * Created by Artur on 1/24/2016.
  */
-public class Settings {
+public class Settings extends Android{
 
     public static HeaderBar headerBar = new HeaderBar();
 
     public final String
-            activity = ".wifi.WifiSettings",
+            activity = "com.android.settings.Settings",
             pkg = "com.android.settings";
 
     public static UiObject
@@ -144,10 +145,15 @@ public class Settings {
         return aboutPhone;
     }
 
+    public Settings open(){
+        adb.openAppsActivity(pkg, activity);
+        return this;
+    }
+
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapWifi(){
         try{
-            if(!wifi().exists()) wifi().scrollTo();
+            if(!wifi().exists()) wifi().scrollToElement();
             wifi().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Wifi option in the Settings Menu");
@@ -157,7 +163,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapBluetooth(){
         try{
-            if(!bluetooth().exists()) bluetooth().scrollTo();
+            if(!bluetooth().exists()) bluetooth().scrollToElement();
             bluetooth().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Bluetooth option in the Settings Menu");
@@ -167,7 +173,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapDataUsage(){
         try{
-            if(!dataUsage().exists()) dataUsage().scrollTo();
+            if(!dataUsage().exists()) dataUsage().scrollToElement();
             dataUsage().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap DataUsage option in the Settings Menu");
@@ -177,7 +183,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapMore(){
         try{
-            if(!more().exists()) more().scrollTo();
+            if(!more().exists()) more().scrollToElement();
             more().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap More option in the Settings Menu");
@@ -187,7 +193,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapDisplay(){
         try{
-            if(!display().exists()) display().scrollTo();
+            if(!display().exists()) display().scrollToElement();
             display().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Display option in the Settings Menu");
@@ -197,7 +203,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapSound_and_notification(){
         try{
-            if(!sound_and_notification().exists()) sound_and_notification().scrollTo();
+            if(!sound_and_notification().exists()) sound_and_notification().scrollToElement();
             sound_and_notification().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap sound_and_notification option in Sound_and_notification Settings Menu");
@@ -207,7 +213,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapStorage(){
         try{
-            if(!storage().exists()) storage().scrollTo();
+            if(!storage().exists()) storage().scrollToElement();
             storage().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Storage option in the Settings Menu");
@@ -217,7 +223,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapBattery(){
         try{
-            if(!battery().exists()) battery().scrollTo();
+            if(!battery().exists()) battery().scrollToElement();
             battery().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Battery option in the Settings Menu");
@@ -227,7 +233,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapApps(){
         try{
-            if(!apps().exists()) apps().scrollTo();
+            if(!apps().exists()) apps().scrollToElement();
             apps().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Apps option in the Settings Menu");
@@ -237,7 +243,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapUsers(){
         try{
-            if(!users().exists()) users().scrollTo();
+            if(!users().exists()) users().scrollToElement();
             users().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Users option in the Settings Menu");
@@ -247,7 +253,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapTap_and_pay(){
         try{
-            if(!tap_and_pay().exists()) tap_and_pay().scrollTo();
+            if(!tap_and_pay().exists()) tap_and_pay().scrollToElement();
             tap_and_pay().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Tap_and_pay option in the Settings Menu");
@@ -257,7 +263,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapLocation(){
         try{
-            if(!location().exists()) location().scrollTo();
+            if(!location().exists()) location().scrollToElement();
             location().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Location option in the Settings Menu");
@@ -267,7 +273,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapSecurity(){
         try{
-            if(!security().exists()) security().scrollTo();
+            if(!security().exists()) security().scrollToElement();
             security().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Security option in the Settings Menu");
@@ -277,7 +283,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapAccounts(){
         try{
-            if(!accounts().exists()) accounts().scrollTo();
+            if(!accounts().exists()) accounts().scrollToElement();
             accounts().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Accounts option in the Settings Menu");
@@ -287,7 +293,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapLanguage_and_input(){
         try{
-            if(!language_and_input().exists()) language_and_input().scrollTo();
+            if(!language_and_input().exists()) language_and_input().scrollToElement();
             language_and_input().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Language_and_input option in the Settings Menu");
@@ -297,7 +303,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapBackup_and_reset(){
         try{
-            if(!backup_and_reset().exists()) backup_and_reset().scrollTo();
+            if(!backup_and_reset().exists()) backup_and_reset().scrollToElement();
             backup_and_reset().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Backup_and_reset option in the Settings Menu");
@@ -307,7 +313,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapDate_and_time(){
         try{
-            if(!date_and_time().exists()) date_and_time().scrollTo();
+            if(!date_and_time().exists()) date_and_time().scrollToElement();
             date_and_time().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Date_and_time option in the Settings Menu");
@@ -317,7 +323,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapAccessibility(){
         try{
-            if(!accessibility().exists()) accessibility().scrollTo();
+            if(!accessibility().exists()) accessibility().scrollToElement();
             accessibility().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Accessibility option in the Settings Menu");
@@ -327,7 +333,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapPrinting(){
         try{
-            if(!printing().exists()) printing().scrollTo();
+            if(!printing().exists()) printing().scrollToElement();
             printing().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap Printing option in the Settings Menu");
@@ -337,7 +343,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapDeveloperOptions(){
         try{
-            if(!developerOptions().exists()) developerOptions().scrollTo();
+            if(!developerOptions().exists()) developerOptions().scrollToElement();
             developerOptions().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap DeveloperOptions option in the Settings Menu");
@@ -347,7 +353,7 @@ public class Settings {
     //TODO Add return type for the proper activity when that activity is ready to be supported
     public void tapAboutPhone(){
         try{
-            if(!aboutPhone().exists()) aboutPhone().scrollTo();
+            if(!aboutPhone().exists()) aboutPhone().scrollToElement();
             aboutPhone().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap AboutPhone option in the Settings Menu");
