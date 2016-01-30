@@ -1,6 +1,6 @@
 package api.android;
 
-import api.android.universal.Objects;
+import api.android.lollipop.base.settings.Settings;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
@@ -20,27 +20,56 @@ public class Android {
      */
     public ADB adb;
     public AndroidDriver driver;
-    public Objects objects = new Objects();
+    public Settings settings;
 
     public Android(){
-        driver = DriverManager.getDriver();
-        adb = new ADB(driver.getCapabilities().getCapability("deviceName").toString());
+        if(driver == null) driver = DriverManager.getDriver();
+        if(adb == null) adb = new ADB(driver.getCapabilities().getCapability("deviceName").toString());
+        if(settings == null) settings = new Settings();
     }
 
     public void scrollDown(){
         Dimension size = driver.manage().window().getSize();
+            int width =  size.getWidth();
+            int height = size.getHeight();
         new TouchAction(driver)
-                .press(size.getWidth()/2,size.getHeight()-200)
+                .press(width/2, height-200)
                 .waitAction(1500)
-                .moveTo(size.getWidth()/2-600, -size.getHeight()+size.getHeight()+700).release().perform();
+                .moveTo(width/2, +700).release().perform();
     }
 
     public void scrollUp(){
         Dimension size = driver.manage().window().getSize();
+            int width =  size.getWidth();
+            int height = size.getHeight();
         new TouchAction(driver)
-                .press(size.getWidth()/2,size.getHeight()-(size.getHeight()-400))
+                .press(width/2, +400)
                 .waitAction(1500)
-                .moveTo(size.getWidth()/2-600, -size.getHeight()+size.getHeight()+size.getHeight()-400).release().perform();
+                .moveTo(width/2, +height-400).release().perform();
+    }
+
+    public void swipeLeft(int region){
+        if(region>20) throw new RuntimeException("Screen height is divided in 20 slices. Use int value between 1 and 20 "+
+                                                 " inclusive, to specify more precise location to perform the swipe");
+        Dimension size = driver.manage().window().getSize();
+            int startx = (int) (size.width * 0.8);
+            int endx = (int) (size.width * 0.20);
+            int height = size.getHeight();
+            int increment = height/20;
+            int starty = increment * region;
+        driver.swipe(startx, starty, endx, starty, 500);
+    }
+
+    public void swipeRight(int region){
+        if(region>20) throw new RuntimeException("Screen height is divided in 20 slices. Use int value between 1 and 20"+
+                                                 " inclusive, to specify more precise location to perform the swipe");
+        Dimension size = driver.manage().window().getSize();
+            int endx = (int) (size.width * 0.8);
+            int startx = (int) (size.width * 0.20);
+            int height = size.getHeight();
+            int increment = height/20;
+            int starty = increment * region;
+        driver.swipe(startx, starty, endx, starty, 500);
     }
 
     public void scrollUp(int times){

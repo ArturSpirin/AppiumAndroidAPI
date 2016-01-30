@@ -1,14 +1,14 @@
 package api.android.lollipop.base.settings;
 
-import api.android.Android;
 import org.openqa.selenium.NoSuchElementException;
+import utils.DriverManager;
 import utils.UiObject;
 import utils.UiSelector;
 
 /**
  * Created by Artur on 1/24/2016.
  */
-public class Settings extends Android{
+public class Settings {
 
     public static HeaderBar headerBar = new HeaderBar();
 
@@ -146,7 +146,8 @@ public class Settings extends Android{
     }
 
     public Settings open(){
-        adb.openAppsActivity(pkg, activity);
+        //DriverManager.getAndroid().adb.forceStopApp(pkg);
+        DriverManager.getAndroid().adb.openAppsActivity(pkg, activity);
         return this;
     }
 

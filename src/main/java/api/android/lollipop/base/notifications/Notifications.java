@@ -1,5 +1,6 @@
 package api.android.lollipop.base.notifications;
 
+import utils.DriverManager;
 import utils.UiObject;
 import utils.UiSelector;
 
@@ -56,5 +57,10 @@ public class Notifications {
     public UiObject dismissIcon(){
         if(dismissIcon == null) dismissIcon = new UiSelector().resourceId("com.android.systemui:id/dismiss_text").makeUiObject();
         return dismissIcon;
+    }
+
+    public Notifications open(){
+        DriverManager.getDriver().openNotifications();
+        return this;
     }
 }

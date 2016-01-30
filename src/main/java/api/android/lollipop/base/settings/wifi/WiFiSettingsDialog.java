@@ -1,6 +1,7 @@
 package api.android.lollipop.base.settings.wifi;
 
 import api.android.Android;
+import api.android.universal.Objects;
 import org.openqa.selenium.NoSuchElementException;
 import utils.UiObject;
 import utils.UiSelector;
@@ -26,7 +27,7 @@ public class WiFiSettingsDialog extends Android {
 
     public WiFiSettings tapConnect(){
         try{
-            objects.button1().tap();
+            Objects.button1().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Connect button absent");
         }
@@ -35,7 +36,7 @@ public class WiFiSettingsDialog extends Android {
 
     public WiFiSettings tapForget(){
         try{
-            objects.button3().tap();
+            Objects.button3().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Forget button absent");
         }
@@ -44,7 +45,7 @@ public class WiFiSettingsDialog extends Android {
 
     public WiFiSettings tapCancel(){
         try{
-            objects.button2().tap();
+            Objects.button2().tap();
         }catch (NoSuchElementException e){
             throw new AssertionError("Cancel button absent");
         }

@@ -1,168 +1,127 @@
 package api.android.lollipop.base.settings;
 
-import api.android.Android;
-import org.junit.*;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import utils.DriverManager;
-
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import utils.Debug;
 
 /**
  * Created by Artur on 1/27/2016.
  */
-public class SettingsTest {
-
-    private static Settings settings;
-
-    @BeforeClass
-    public static void preSet() throws MalformedURLException {
-        System.out.println("BeforeClass");
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("deviceName", "ZX1G22BV8Z");
-        desiredCapabilities.setCapability("platformName", "Android");
-        desiredCapabilities.setCapability("app", "./build/unlock_apk/unlock_apk-debug.apk");
-        new DriverManager(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities).getAndroidDevice();
-        settings = new Settings();
-    }
-
-    @AfterClass
-    public static void finisher(){
-        DriverManager.getDriver().quit();
-    }
+public class SettingsTest extends Debug{
 
     @Before
-    public void setUp() throws Exception {
-        settings.open();
+    public void setUp() {
+        android.settings.open();
     }
 
     @After
-    public void tearDown() throws Exception {
-        settings.pressHome();
+    public void tearDown() {
+        android.pressHome();
     }
 
     @Test
-    public void testScrollDown() throws InterruptedException {
-        new Android().scrollDown();
+    public void testWifi() {
+        android.settings.tapWifi();
     }
 
     @Test
-    public void testScrollUp() throws InterruptedException {
-        new Android().scrollUp();
+    public void testBluetooth() {
+        android.settings.tapBluetooth();
     }
 
     @Test
-    public void testScrollUpX() throws InterruptedException {
-        new Android().scrollUp(5);
+    public void testDataUsage() {
+        android.settings.tapDataUsage();
     }
 
     @Test
-    public void testScrollDownX() throws InterruptedException {
-        new Android().scrollDown(5);
+    public void testMore() {
+        android.settings.tapMore();
     }
 
     @Test
-    public void testWifi() throws Exception {
-        settings.tapWifi();
+    public void testDisplay() {
+        android.settings.tapDisplay();
     }
 
     @Test
-    public void testBluetooth() throws Exception {
-        settings.tapBluetooth();
+    public void testSound_and_notification() {
+        android.settings.tapSound_and_notification();
     }
 
     @Test
-    public void testDataUsage() throws Exception {
-        settings.tapDataUsage();
+    public void testStorage() {
+        android.settings.tapStorage();
     }
 
     @Test
-    public void testMore() throws Exception {
-        settings.tapMore();
+    public void testBattery() {
+        android.settings.tapBattery();
     }
 
     @Test
-    public void testDisplay() throws Exception {
-        settings.tapDisplay();
+    public void testApps() {
+        android.settings.tapApps();
     }
 
     @Test
-    public void testSound_and_notification() throws Exception {
-        settings.tapSound_and_notification();
+    public void testUsers() {
+        android.settings.tapUsers();
     }
 
     @Test
-    public void testStorage() throws Exception {
-        settings.tapStorage();
+    public void testTap_and_pay() {
+        android.settings.tapTap_and_pay();
     }
 
     @Test
-    public void testBattery() throws Exception {
-        settings.tapBattery();
+    public void testLocation() {
+        android.settings.tapLocation();
     }
 
     @Test
-    public void testApps() throws Exception {
-        settings.tapApps();
+    public void testSecurity() {
+        android.settings.tapSecurity();
     }
 
     @Test
-    public void testUsers() throws Exception {
-        settings.tapUsers();
+    public void testAccounts() {
+        android.settings.tapAccounts();
     }
 
     @Test
-    public void testTap_and_pay() throws Exception {
-        settings.tapTap_and_pay();
+    public void testLanguage_and_input() {
+        android.settings.tapLanguage_and_input();
     }
 
     @Test
-    public void testLocation() throws Exception {
-        settings.tapLocation();
+    public void testBackup_and_reset() {
+        android.settings.tapBackup_and_reset();
     }
 
     @Test
-    public void testSecurity() throws Exception {
-        settings.tapSecurity();
+    public void testDate_and_time() {
+        android.settings.tapDate_and_time();
     }
 
     @Test
-    public void testAccounts() throws Exception {
-        settings.tapAccounts();
+    public void testAccessibility() {
+        android.settings.tapAccessibility();
     }
 
     @Test
-    public void testLanguage_and_input() throws Exception {
-        settings.tapLanguage_and_input();
+    public void testPrinting() {
+        android.settings.tapPrinting();
     }
 
     @Test
-    public void testBackup_and_reset() throws Exception {
-        settings.tapBackup_and_reset();
+    public void testDeveloperOptions() {
+        android.settings.tapDeveloperOptions();
     }
 
     @Test
-    public void testDate_and_time() throws Exception {
-        settings.tapDate_and_time();
-    }
-
-    @Test
-    public void testAccessibility() throws Exception {
-        settings.tapAccessibility();
-    }
-
-    @Test
-    public void testPrinting() throws Exception {
-        settings.tapPrinting();
-    }
-
-    @Test
-    public void testDeveloperOptions() throws Exception {
-        settings.tapDeveloperOptions();
-    }
-
-    @Test
-    public void testAboutPhone() throws Exception {
-        settings.tapAboutPhone();
+    public void testAboutPhone() {
+        android.settings.tapAboutPhone();
     }
 }

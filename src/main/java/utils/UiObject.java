@@ -157,7 +157,7 @@ public class UiObject extends Android{
         while(!exists()){
             System.out.println("Tries: "+tries);
             if(tries>=7) throw new RuntimeException("Failed to scroll to the element, element not found!");
-            if(tries<=4)scrollDown();
+            if(tries<=4) scrollDown();
             else if(tries==5){
                 System.out.println("Scrolling all the way up");
                 scrollUp(5);
