@@ -35,7 +35,7 @@ public class UiSelector {
     }
 
     public UiSelector clickable(boolean value){
-        locator += ".resourceId("+value+")";
+        locator += ".clickable("+value+")";
         return this;
     }
 
@@ -44,7 +44,7 @@ public class UiSelector {
         return this;
     }
 
-    public UiSelector enabled(String value){
+    public UiSelector enabled(boolean value){
         locator += ".enabled("+value+")";
         return this;
     }
@@ -61,6 +61,11 @@ public class UiSelector {
 
     public UiSelector descriptionMatches(String regex){
         locator += ".descriptionMatches(\""+regex+"\")";
+        return this;
+    }
+
+    public UiSelector xPath(String xPath){
+        locator = xPath;
         return this;
     }
 

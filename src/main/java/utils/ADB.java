@@ -1,7 +1,9 @@
 package utils;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 /**
  * Created by Artur Spirin on 1/20/16.
@@ -9,17 +11,30 @@ import java.util.LinkedList;
  * about the device or its state. ADB Class offers it's methods in static and non-static context.
  * Android class has an Aggregation relationship with ADB
  **/
-public class ADB {
+public class ADB{
 
-    public String deviceID;
+    private String deviceID;
+    private static String ANDROID_HOME;
 
     public ADB(String deviceID){
         this.deviceID = deviceID;
     }
 
+    private static String getAndroidHome(){
+        if(ANDROID_HOME == null) ANDROID_HOME = System.getenv("ANDROID_HOME");
+        if(ANDROID_HOME == null) throw new RuntimeException("Failed to find ANDROID_HOME. Make sure you have ANDROID_HOME set as an environment variable!");
+        return ANDROID_HOME;
+    }
+
     public static String runCommand(String command) {
-        if(command.startsWith("adb")) command = command.replace("adb", "");
-        return CommonUtils.runtimeCommand(CommonUtils.getAndroidHome()+"/platform-tools/adb "+command);
+        if(command.startsWith("adb")) command = command.replace("adb ", getAndroidHome()+"/platform-tools/adb ");
+        try{
+            Scanner s = new Scanner(Runtime.getRuntime().exec(command).getInputStream()).useDelimiter("\\A");
+            if(s.hasNext()) return s.next();
+            else return null;
+        }catch (IOException e){
+            throw new RuntimeException("Failed to run command: "+command+"! Caught exception: "+e.getMessage());
+        }
     }
 
     public static void killServer(){
@@ -34,9 +49,7 @@ public class ADB {
         LinkedList devices = new LinkedList();
         String raw = runCommand("devices");
         for(String line : raw.split("\n")){
-            if(line.endsWith("device")) {
-                devices.add(line.replace("device","").trim());
-            }
+            if(line.endsWith("device")) devices.add(line.replace("device","").trim());
         }
         return devices;
     }

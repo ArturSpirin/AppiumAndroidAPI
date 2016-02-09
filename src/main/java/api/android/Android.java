@@ -1,12 +1,11 @@
 package api.android;
 
-import api.android.lollipop.base.settings.Settings;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 import org.openqa.selenium.Dimension;
 import utils.ADB;
-import utils.DriverManager;
+import utils.cURL;
 
 
 /**
@@ -15,19 +14,26 @@ import utils.DriverManager;
 public class Android {
 
     /**
-     * Aggregation. Android has a relationship with ADB and AndroidDriver.
-     * Once a new instance of Android is created ADB and AndroidDriver methods become available for that specific Android device
+     * Aggregation.
+     * Once a new instance of Android is created, ADB,cURL and AndroidDriver methods become available for that specific Android device
      */
     public ADB adb;
-    public AndroidDriver driver;
-    public Settings settings;
+    public cURL curl;
+    public static AndroidDriver driver;
 
-    public Android(){
-        if(driver == null) driver = DriverManager.getDriver();
-        if(adb == null) adb = new ADB(driver.getCapabilities().getCapability("deviceName").toString());
-        if(settings == null) settings = new Settings();
+    /**
+     * @param driver Must initiate Android instance with the AndroidDriver
+     */
+    public Android(AndroidDriver driver){
+        this.driver = driver;
+        String deviceID = (String) driver.getCapabilities().getCapability("deviceName");
+        this.adb = new ADB(deviceID);
+        this.curl = new cURL();
     }
 
+    /**
+     * This is a simple method that divides the screen's width in half and does a swipe up motion
+     */
     public void scrollDown(){
         Dimension size = driver.manage().window().getSize();
             int width =  size.getWidth();
@@ -38,6 +44,9 @@ public class Android {
                 .moveTo(width/2, +700).release().perform();
     }
 
+    /**
+     * This is a simple method that divides the screen's width in half and does a swipe down motion
+     */
     public void scrollUp(){
         Dimension size = driver.manage().window().getSize();
             int width =  size.getWidth();
@@ -48,6 +57,44 @@ public class Android {
                 .moveTo(width/2, +height-400).release().perform();
     }
 
+    /**
+     * This is a simple method that divides the screen's height in 20 slices and does a swipe motion to scroll down
+     */
+    public void scrollDown(int region){
+        if(region>20) throw new RuntimeException("Screen height is divided in 20 slices. Use int value between 1 and 20 "+
+                " inclusive, to specify more precise location to perform the swipe");
+        Dimension size = driver.manage().window().getSize();
+        int width =  size.getWidth();
+        int height = size.getHeight();
+        int increment = height/20;
+        int start = increment*region;
+        new TouchAction(driver)
+                .press(width/2, start)
+                .waitAction(1500)
+                .moveTo(width/2, height-start).release().perform();
+    }
+
+    /**
+     * This is a simple method that divides the screen's height in 20 slices and does a swipe motion to scroll down
+     */
+    public void scrollUp(int region){
+        if(region>20) throw new RuntimeException("Screen height is divided in 20 slices. Use int value between 1 and 20 "+
+                " inclusive, to specify more precise location to perform the swipe");
+        Dimension size = driver.manage().window().getSize();
+        int width =  size.getWidth();
+        int height = size.getHeight();
+        int increment = height/20;
+        int start = increment*region;
+        new TouchAction(driver)
+                .press(width/2, +start)
+                .waitAction(1500)
+                .moveTo(width/2, +height-10).release().perform();
+    }
+
+    /**
+     * Simple swipe action to the left.
+     * @param region specifies the more precise location of where to do the swipe action
+     */
     public void swipeLeft(int region){
         if(region>20) throw new RuntimeException("Screen height is divided in 20 slices. Use int value between 1 and 20 "+
                                                  " inclusive, to specify more precise location to perform the swipe");
@@ -60,6 +107,10 @@ public class Android {
         driver.swipe(startx, starty, endx, starty, 500);
     }
 
+    /**
+     * Simple swipe action to the right.
+     * @param region specifies the more precise location of where to do the swipe action
+     */
     public void swipeRight(int region){
         if(region>20) throw new RuntimeException("Screen height is divided in 20 slices. Use int value between 1 and 20"+
                                                  " inclusive, to specify more precise location to perform the swipe");
@@ -70,14 +121,6 @@ public class Android {
             int increment = height/20;
             int starty = increment * region;
         driver.swipe(startx, starty, endx, starty, 500);
-    }
-
-    public void scrollUp(int times){
-        for(int i=times; i!=0; i--) scrollUp();
-    }
-
-    public void scrollDown(int times){
-        for(int i=times; i!=0; i--) scrollDown();
     }
 
     public void pressBack(){
